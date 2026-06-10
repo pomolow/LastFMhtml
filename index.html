@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<div id="lastfm"></div>
 
-<div class="nowplayingcard">
-    <div class="nowplayingcontainer-inner">
-        <img id="trackart" src="#">
-        <div class="trackInfo">
-            <a id="tracktitle"></a>
-            <a href="#" id="trackartist"></a>
-        </div>
-    </div>
-</div>
-    
-<script src="main.js"></script>
-
-</html>
+<script>
+fetch("https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=pomolowww&api_key=4e13fba4aa6b576ff66113ec4dc392ae&format=json&limit=1")
+  .then(r => r.json())
+  .then(data => {
+    const track = data.recenttracks.track[0];
+    document.getElementById("lastfm").innerHTML =
+      `<strong>${track.name}</strong><br>${track.artist["#text"]}`;
+  });
+</script>
